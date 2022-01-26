@@ -26,3 +26,28 @@ export const useActors = () => {
 
   return { actors, isLoading, error };
 };
+
+export const useEditName = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const changeName = useCallback(async (actorId, newName) => {
+    try {
+      setIsLoading(true);
+      await fetch(API, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id: actorId, name: newName }),
+      });
+    } catch (requestError) {
+      setError(requestError);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  return { changeName, isLoading, error };
+};

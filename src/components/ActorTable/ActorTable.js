@@ -18,7 +18,7 @@ const ActorTable = ({ actors }) => (
     </thead>
     <tbody>
       {actors.map((actor, index) => (
-        <ActorItem actor={actor} index={index} />
+        <ActorItem actor={actor} index={index} key={actor.id}/>
       ))}
     </tbody>
   </Table>
