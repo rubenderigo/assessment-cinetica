@@ -1,12 +1,14 @@
 import ActorTable from './components/ActorTable';
-import { useGetActors } from './hooks/actor';
+import { useActors } from './hooks/actor';
 
 const App = () => {
-  const { actors } = useGetActors();
+  const { actors, isLoading, error } = useActors();
 
   return (
     <div className="container">
-      <ActorTable actors={actors} />
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{error.message}</p>}
+      {!isLoading && !error && <ActorTable actors={actors} />}
     </div>
   );
 };
